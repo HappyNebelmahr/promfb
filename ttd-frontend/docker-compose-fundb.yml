@@ -1,0 +1,25 @@
+version: '2'
+services:
+    frontend:
+      image: nebelmahr/promfront:001
+
+      ports:
+       - "5001:80"
+
+    backend:
+     image: nebelmahr/promgraf:002  
+     ports: 
+       - "5002:5002"
+    
+     mysql:
+    container_name: flask_mysql
+    restart: always
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 'test_pass' # TODO: Change this
+      MYSQL_USER: 'test'
+      MYSQL_PASS: 'pass'
+    volumes:
+      - my-datavolume:/var/lib/mysql
+volumes:
+  my-datavolume:
